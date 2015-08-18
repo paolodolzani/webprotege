@@ -71,11 +71,11 @@ public abstract class WebProtegeRemoteServiceServlet extends RemoteServiceServle
      */
     public UserId getUserInSessionAndEnsureSignedIn() throws NotSignedInException {
         UserId userId = getUserInSession();
-        //if (userId.isGuest()) {
-          //  throw new NotSignedInException();
-        //} else {
+        if (userId.isGuest()) {
+            throw new NotSignedInException();
+        } else {
             return userId;
-        //}
+        }
     }
 
     /**
