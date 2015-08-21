@@ -153,7 +153,7 @@ public class OWLAPIProjectDocumentStore {
     }
 
 
-    //funzione che esporta il file nel formato desiderato
+
     public void exportProject(OutputStream outputStream, DownloadFormat format) throws IOException, OWLOntologyStorageException {
         // Does it already exist in the download cache?
         createDownloadCacheIfNecessary(format);

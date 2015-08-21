@@ -170,6 +170,8 @@ public class OWLAPIProjectMetadataManager {
     private UserId getOwner(ProjectId projectId) {
         ProjectInstance pi = getProjectInstance(projectId);
         User owner = pi.getOwner();
+        if(owner==null)                    //righe modificate
+            return UserId.getGuest();
         return UserId.getUserId(owner.getName());
     }
 

@@ -58,7 +58,7 @@ public class WebProtege implements EntryPoint {
 
     protected void buildUI() {
         RootPanel.get().add(new WorkspaceViewImpl());
-
+        System.out.println("avvio alla costruzione dell'applicazione");   //da rimuovere
         final Optional<String> appName = Application.get().getClientApplicationProperty(WebProtegePropertyName.APPLICATION_NAME);
         if (appName.isPresent()) {
             Window.setTitle(appName.get());

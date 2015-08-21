@@ -96,9 +96,9 @@ public abstract class WebProtegeRemoteServiceServlet extends RemoteServiceServle
      */
     protected boolean isSignedInUserProjectOwner(ProjectId projectId) {
         UserId userId = getUserInSession();
-        if (userId.isGuest()) {
-            return false;
-        }
+        //if (userId.isGuest()) {                modifica che permette ad utenti guest di accedere a progetti da
+        //    return false;                      loro creati
+        //}
         MetaProjectManager mpm = getMetaProjectManager();
         MetaProject metaProject = mpm.getMetaProject();
         ProjectInstance project = metaProject.getProject(projectId.getId());

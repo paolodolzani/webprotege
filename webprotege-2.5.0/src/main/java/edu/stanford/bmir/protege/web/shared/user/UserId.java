@@ -26,7 +26,7 @@ public class UserId implements Serializable, IsSerializable, Comparable<UserId> 
      */
     private static final UserId GUEST_USER_ID = new UserId(GUEST_USER_NAME);
 
-    private String userName;
+    private  String userName;
 
     /**
      * For serialization purposes only.
@@ -88,10 +88,15 @@ public class UserId implements Serializable, IsSerializable, Comparable<UserId> 
      * @return A string representing the user name.  Not {@code null}.
      */
     public String getUserName() {
+        if(userName==null)                  //modificata prima era solo return userName
+            return GUEST_USER_NAME;
         return userName;
     }
 
-
+   public void setUserName(String username)                //funzione aggiunta per settare il nome utente nel caso in cui si ha a che fare con un utente guest
+   {
+       this.userName=username;
+   }
 
     @Override
     public boolean equals(Object obj) {
