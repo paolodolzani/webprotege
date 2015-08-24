@@ -33,7 +33,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import com.gwtext.client.widgets.MessageBox;
 import edu.stanford.bmir.protege.web.client.ui.projectmanager.ConvertAndReturnRequestHandler;
 
 /**
@@ -70,7 +69,6 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
     private ConvertAndReturnRequestHandler convertandreturnrequesthandler = new ConvertAndReturnRequestHandler() {
         @Override
         public void handleProjectConvertRequest(ProjectId projectId){
-            MessageBox.alert("nessun gestore registrato");              //da rimuovere
             GWT.log("handleProjectConvertRequest: No handler registered.");
         }
     };
@@ -323,9 +321,14 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
             super(new ClickableTextCell());
         }
         
+
+        @Override
+        public void render(Cell.Context context, ProjectListEntry object, SafeHtmlBuilder sb) {
+            sb.appendHtmlConstant("<div style=\"width: 100%; height: 100%; cursor: pointer;\" title=\"Download latest version of project\"><img style=\"padding-top: 1px; \" src=\"images/download.png\"/></div>");
+        }
         @Override
         public String getValue(ProjectListEntry object){
-            return "Convert and go to trill " + object.getProjectId();
+            return "Convert and return to trill " + object.getProjectId();
         }
         
         @Override 
@@ -339,10 +342,10 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
             convertandreturnrequesthandler.handleProjectConvertRequest(object.getProjectId());
         }
         
-        @Override
+      /*  @Override
         public void render(Cell.Context context, ProjectListEntry object, SafeHtmlBuilder sb){
             sb.appendHtmlConstant("<div style=\"width: 100%; height: 100%; cursor: pointer;\" title=\"Convert and return to trill\"><img style=\"padding-top: 1px; \" src=\"images/download.png\"/></div>");
-        }
+        }*/
     }
 
 

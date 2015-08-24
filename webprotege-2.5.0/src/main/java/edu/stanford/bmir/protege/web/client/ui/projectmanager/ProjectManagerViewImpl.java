@@ -148,7 +148,11 @@ public class ProjectManagerViewImpl extends Composite implements ProjectManagerV
     }
 
 
-
+    @Override
+    public void setConvertManagerRequestHandler(ConvertAndReturnRequestHandler handler){  //aggiunto
+        projectListView.setConvertManagerRequestHandler(checkNotNull(handler));
+    }
+    
     @Override
     public void setLoadProjectRequestHandler(LoadProjectRequestHandler handler) {
         projectListView.setLoadProjectRequestHandler(checkNotNull(handler));

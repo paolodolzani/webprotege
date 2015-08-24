@@ -78,6 +78,7 @@ public class ProjectManagerPresenter {
         projectManagerView.setUploadProjectRequestHandler(new UploadProjectRequestHandlerImpl());
         projectManagerView.setDownloadProjectRequestHandler(new DownloadProjectRequestHandlerImpl());
         projectManagerView.setTrashManagerRequestHandler(new TrashManagerRequestHandlerImpl());
+        projectManagerView.setConvertManagerRequestHandler(new ConvertAndReturnRequestHandlerImpl());       //aggiungo il listener per conversione e ritorno a trill
 
         projectManagerView.setViewCategoryChangedHandler(new ViewCategoryChangedHandler() {
             @Override

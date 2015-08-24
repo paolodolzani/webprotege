@@ -83,12 +83,6 @@ public class ProjectBarImpl extends Composite implements ProjectActionBar {
                 showFreshEntitySettingsHandler.handleShowFreshEntitySettings();
             }
         });
-        popupMenu.addItem("Convert to RDF and return to trill", new ClickHandler(){   //riga aggiunta
-            @Override
-            public void onClick(ClickEvent event) {
-              //implementare metodo
-             }
-        });
         popupMenu.showRelativeTo(projectSettingsItem);
     }
 

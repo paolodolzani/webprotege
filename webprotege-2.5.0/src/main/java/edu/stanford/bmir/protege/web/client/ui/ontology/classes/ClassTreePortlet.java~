@@ -561,7 +561,7 @@ public class ClassTreePortlet extends AbstractOWLEntityPortlet {
                 onCreateCls(e.isShiftKey() ? CreateClassesMode.IMPORT_CSV : CreateClassesMode.CREATE_SUBCLASSES);
             }
         });
-        createButton.setDisabled(!hasWritePermission());             //vedi qui
+        createButton.setDisabled(!hasWritePermission());
         return createButton;
     }
 
@@ -574,8 +574,8 @@ public class ClassTreePortlet extends AbstractOWLEntityPortlet {
                 onDeleteCls();
             }
         });
-        deleteButton.setDisabled(!getProject().hasWritePermission(Application.get().getUserId()));   //vedi qui
-        deleteButton.setDisabled(!getDeleteEnabled());          //vedi qui
+        deleteButton.setDisabled(!getProject().hasWritePermission(Application.get().getUserId()));
+        deleteButton.setDisabled(!getDeleteEnabled());
         return deleteButton;
     }
 

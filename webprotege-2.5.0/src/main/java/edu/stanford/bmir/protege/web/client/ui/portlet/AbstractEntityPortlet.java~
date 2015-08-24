@@ -131,7 +131,7 @@ public abstract class AbstractEntityPortlet extends Portlet implements EntityPor
         return Application.get().getUserId();
     }
 
-    public boolean hasWritePermission() {                          //funzione da controllare
+    public boolean hasWritePermission() {
         return getProject().hasWritePermission(Application.get().getUserId());
     }
 
