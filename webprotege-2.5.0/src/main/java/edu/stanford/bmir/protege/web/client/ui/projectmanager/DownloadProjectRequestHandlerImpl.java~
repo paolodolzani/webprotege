@@ -26,6 +26,7 @@ public class DownloadProjectRequestHandlerImpl implements DownloadProjectRequest
 
             @Override
             public void onSuccess() {
+                System.out.println("ricevuta richiesta du download");
                 DownloadSettingsDialog.showDialog(new DownloadFormatExtensionHandler() {
                     @Override
                     public void handleDownload(DownloadFormatExtension extension) {

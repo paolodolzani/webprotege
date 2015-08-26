@@ -194,12 +194,12 @@ public class ProjectManagerPresenter {
         final boolean guest = Application.get().getUserId().isGuest();
         projectManagerView.setCreateProjectEnabled(!guest);
         projectManagerView.setUploadProjectEnabled(!guest);
-        if (guest) {
+   /*     if (guest) {
             projectManagerView.setViewCategories(Arrays.asList(ProjectManagerViewCategory.HOME));
         }
-        else {
+        else {*/
             projectManagerView.setViewCategories(Arrays.asList(ProjectManagerViewCategory.HOME, ProjectManagerViewCategory.OWNED_BY_ME, ProjectManagerViewCategory.TRASH));
-        }
+       // }
     }
 
 

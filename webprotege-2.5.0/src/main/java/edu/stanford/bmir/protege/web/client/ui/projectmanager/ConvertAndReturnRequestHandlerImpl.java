@@ -8,8 +8,6 @@ package edu.stanford.bmir.protege.web.client.ui.projectmanager;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.RunAsyncCallback;
-import edu.stanford.bmir.protege.web.client.download.DownloadFormatExtensionHandler;
-import edu.stanford.bmir.protege.web.client.download.DownloadSettingsDialog;
 import edu.stanford.bmir.protege.web.client.download.ProjectRevisionDownloader;
 import edu.stanford.bmir.protege.web.shared.download.DownloadFormatExtension;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
@@ -29,15 +27,16 @@ public class ConvertAndReturnRequestHandlerImpl implements ConvertAndReturnReque
 
             @Override
             public void onSuccess() {
-                DownloadSettingsDialog.showDialog(new DownloadFormatExtensionHandler() {
+               /* DownloadSettingsDialog.showDialog(new DownloadFormatExtensionHandler() {
                     @Override
-                    public void handleDownload(DownloadFormatExtension extension) {
+                    public void handleDownload(DownloadFormatExtension extension) {*/
                         doConversion(projectId, DownloadFormatExtension.owl);
+                        //doConversion(projectID);
                     }
                 });
             }
-        });
-    }
+       /* });*/
+    
     
      private void doConversion(ProjectId projectId, DownloadFormatExtension extension) {
         RevisionNumber head = RevisionNumber.getHeadRevisionNumber();
@@ -45,3 +44,11 @@ public class ConvertAndReturnRequestHandlerImpl implements ConvertAndReturnReque
         downloader.download();
     }
 }
+    /*private void doConversion(ProjectId projectId){
+        RevisionNumber head=RevisionNumber.getHeadRevisionNumber();
+        ProjectRevisionConverter converter=new ProjectRevisionConverter(projectId,head);
+        converter.convert();
+    }
+}*/
+
+     

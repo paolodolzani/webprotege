@@ -14,6 +14,7 @@ import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 import edu.stanford.bmir.protege.web.shared.user.UserId;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import com.gwtext.client.widgets.MessageBox;
 
 /**
  * A project on the client side. A project has information about:
@@ -93,7 +94,7 @@ public class Project implements HasProjectId, HasDispose {
 //    }
 
     public boolean hasWritePermission(UserId userId) {
-        return permissionManager.hasPermission(userId, Permission.getWritePermission());
+        return permissionManager.hasPermission(userId, Permission.getWritePermission()) || this.getProjectDetails().getOwner().isGuest(); //modificato
     }
 
     public boolean hasWritePermission() {

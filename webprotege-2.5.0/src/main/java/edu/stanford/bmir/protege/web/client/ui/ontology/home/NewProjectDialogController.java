@@ -52,14 +52,12 @@ public class NewProjectDialogController extends WebProtegeOKCancelDialogControll
         //}
         NewProjectSettings newProjectSettings = new NewProjectSettings(userId, data.getProjectName(), data.getProjectDescription(), data.getProjectType());
         ProjectManagerServiceAsync projectManagerService = GWT.create(ProjectManagerService.class);
-        MessageBox.alert("sto procedendo alla creazione del progetto");      //da rimuovere
         projectManagerService.createNewProject(newProjectSettings, new AsyncCallback<ProjectDetails>() {
             public void onFailure(Throwable caught) {
                 handleCreateProjectFailure(caught);
             }
 
             public void onSuccess(ProjectDetails result) {
-                MessageBox.alert("sta andando bene");              //da rimuovere
                 handleCreateProjectSuccess(result);
             }
         });

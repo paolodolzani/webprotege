@@ -561,7 +561,7 @@ public class ClassTreePortlet extends AbstractOWLEntityPortlet {
                 onCreateCls(e.isShiftKey() ? CreateClassesMode.IMPORT_CSV : CreateClassesMode.CREATE_SUBCLASSES);
             }
         });
-        createButton.setDisabled(!hasWritePermission());
+        createButton.setDisabled(!hasWritePermission());             //vedi qui
         return createButton;
     }
 
@@ -574,8 +574,8 @@ public class ClassTreePortlet extends AbstractOWLEntityPortlet {
                 onDeleteCls();
             }
         });
-        deleteButton.setDisabled(!getProject().hasWritePermission(Application.get().getUserId()));
-        deleteButton.setDisabled(!getDeleteEnabled());
+        deleteButton.setDisabled(!getProject().hasWritePermission(Application.get().getUserId()));   //vedi qui
+        deleteButton.setDisabled(!getDeleteEnabled());          //vedi qui
         return deleteButton;
     }
 
@@ -1508,6 +1508,7 @@ public class ClassTreePortlet extends AbstractOWLEntityPortlet {
 
     public void updateButtonStates() {
         if (hasWritePermission()) {
+            MessageBox.showAlert("hai i permessi di scrittura");
             if (createButton != null) {
                 createButton.enable();
             }
@@ -1516,6 +1517,7 @@ public class ClassTreePortlet extends AbstractOWLEntityPortlet {
             }
         }
         else {
+            MessageBox.showAlert("non hai i permessi di scrittura");
             if (createButton != null) {
                 createButton.disable();
             }
