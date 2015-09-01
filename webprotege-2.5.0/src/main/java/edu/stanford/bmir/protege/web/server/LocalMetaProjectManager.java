@@ -162,7 +162,7 @@ public class LocalMetaProjectManager extends AbstractMetaProjectManager {
     }
 
 	private boolean isUserOwner(User user, User owner) {
-		return user != null && owner != null && owner.equals(user);
+		return (user != null && owner != null && owner.equals(user))||(owner == null && user==null);  //riga modificata per permettere di listare i progetti creati da utenti guest
 	}
 
     private boolean isAuthorisedToRead(Policy policy, User user, ProjectInstance projectInstance) {

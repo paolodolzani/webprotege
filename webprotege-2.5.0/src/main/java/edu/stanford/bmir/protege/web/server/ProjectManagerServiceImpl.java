@@ -59,8 +59,8 @@ public class ProjectManagerServiceImpl extends WebProtegeRemoteServiceServlet im
                 result.add(projectName);
             }
             if( owner == null && userId.isGuest() ){             //modifica effettuata da me
-                LOGGER.info("incluso progetto");
                 String projectName = instance.getName();
+                LOGGER.info("incluso progetto: " + projectName);
                 result.add(projectName);
             }
         }
