@@ -12,7 +12,6 @@ import edu.stanford.bmir.protege.web.client.download.ProjectRevisionDownloader;
 import edu.stanford.bmir.protege.web.shared.download.DownloadFormatExtension;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 import edu.stanford.bmir.protege.web.shared.revision.RevisionNumber;
-
 /**
  *
  * @author antonio
@@ -42,12 +41,25 @@ public class ConvertAndReturnRequestHandlerImpl implements ConvertAndReturnReque
         RevisionNumber head = RevisionNumber.getHeadRevisionNumber();
         ProjectRevisionDownloader downloader = new ProjectRevisionDownloader(projectId, head, extension);
         downloader.download();
+        jscode("ciao mondo");
+        //altjscode("ciao");
     }
+     private native void jscode(String messaggio)/*-{ 
+             $doc.write("<form target='_blank' method='post' action='http://127.0.0.1:3020/trill_on_swish/' name='ConversionHiddenForm' ><input type='hidden' name='convertedProject' value=''></form>");
+             $doc.ConversionHiddenForm.convertedProject.value = messaggio; 
+             $doc.ConversionHiddenForm.submit();
+             $doc.location.href="http://127.0.0.1:8084/webprotege/";
+             }-*/;
+     private native void altjscode(String messaggio)/*-{
+             var convertedProject= messaggio;
+             jQuery.get("http://www.google.it",convertedProject,null,String);
+             }-*/;
 }
     /*private void doConversion(ProjectId projectId){
         RevisionNumber head=RevisionNumber.getHeadRevisionNumber();
         ProjectRevisionConverter converter=new ProjectRevisionConverter(projectId,head);
         converter.convert();
+        jscode(converter.getConvertedProject());
     }
 }*/
 

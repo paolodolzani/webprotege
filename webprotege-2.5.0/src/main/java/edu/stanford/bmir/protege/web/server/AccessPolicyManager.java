@@ -67,8 +67,13 @@ public class AccessPolicyManager {
                 return false;
             }
             User owner = projectInstance.getOwner();
-
-            if (owner.getName().equalsIgnoreCase(userId.getUserName())) {
+            if(owner!=null)                          //modifica effettuata
+            {
+                if (owner.getName().equalsIgnoreCase(userId.getUserName())) {
+                return true;
+                }
+            }
+            if (owner == null && userId.isGuest()){
                 return true;
             }
         }

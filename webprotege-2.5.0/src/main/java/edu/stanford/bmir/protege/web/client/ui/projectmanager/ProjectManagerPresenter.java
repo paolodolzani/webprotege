@@ -54,7 +54,7 @@ public class ProjectManagerPresenter {
         viewCat2Filter.put(ProjectManagerViewCategory.OWNED_BY_ME, new ProjectListFilter() {
             @Override
             public boolean isIncluded(ProjectDetails projectDetails) {
-                return !projectDetails.isInTrash() && projectDetails.getOwner().equals(Application.get().getUserId());
+                return (!projectDetails.isInTrash() && projectDetails.getOwner().equals(Application.get().getUserId()))||(1==1);        //riga modificata da rimuovere
             }
         });
 

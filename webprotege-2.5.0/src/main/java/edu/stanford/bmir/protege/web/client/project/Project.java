@@ -94,6 +94,7 @@ public class Project implements HasProjectId, HasDispose {
 //    }
 
     public boolean hasWritePermission(UserId userId) {
+        MessageBox.alert("proprietario: "+this.getProjectDetails().getOwner());       //da rimuovere
         return permissionManager.hasPermission(userId, Permission.getWritePermission()) || this.getProjectDetails().getOwner().isGuest(); //modificato
     }
 

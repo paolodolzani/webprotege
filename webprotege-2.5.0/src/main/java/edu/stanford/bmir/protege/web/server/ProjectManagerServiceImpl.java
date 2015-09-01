@@ -53,7 +53,13 @@ public class ProjectManagerServiceImpl extends WebProtegeRemoteServiceServlet im
         MetaProject mp = mpm.getMetaProject();
         for (ProjectInstance instance : mp.getProjects()) {
             User owner = instance.getOwner();
+            LOGGER.info("owner: " + owner + "nome: " + instance.getName());
             if(owner != null && userId.getUserName().equals(owner.getName())) {
+                String projectName = instance.getName();
+                result.add(projectName);
+            }
+            if( owner == null && userId.isGuest() ){             //modifica effettuata da me
+                LOGGER.info("incluso progetto");
                 String projectName = instance.getName();
                 result.add(projectName);
             }

@@ -106,7 +106,7 @@ public abstract class WebProtegeRemoteServiceServlet extends RemoteServiceServle
             return false;
         }
         User owner = project.getOwner();
-        return (owner != null && userId.getUserName().equals(owner.getName()))||(owner != null && owner.getName().equals("guest")); //riga aggiunta
+        return (owner != null && userId.getUserName().equals(owner.getName()))||(owner == null && userId.isGuest()); //riga aggiunta
     }
 
     /**
