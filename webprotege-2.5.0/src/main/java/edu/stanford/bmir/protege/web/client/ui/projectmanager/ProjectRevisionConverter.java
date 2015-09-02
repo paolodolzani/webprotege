@@ -10,6 +10,10 @@ import edu.stanford.bmir.protege.web.shared.download.DownloadFormatExtension;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 import edu.stanford.bmir.protege.web.shared.revision.RevisionNumber;
 import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.URL;
+import com.google.gwt.user.client.Window;
+import com.gwtext.client.widgets.MessageBox;
 
 /**
  *
@@ -20,18 +24,22 @@ public class ProjectRevisionConverter {
     
     private final RevisionNumber revisionnumber;
     
-    private final DownloadFormatExtension downloadformatextension;
+    private final DownloadFormatExtension formatextension;
     
     private String convertedProject;
     
     public ProjectRevisionConverter(ProjectId projectid, RevisionNumber revisionnumber){
         this.projectid = checkNotNull(projectid);
         this.revisionnumber= checkNotNull(revisionnumber);
-        this.downloadformatextension= DownloadFormatExtension.owl;
+        this.formatextension= DownloadFormatExtension.owl;
     }
     
     public void convert(){
-        //metodo da implementare
+        String encodedProjectName = URL.encode(projectid.getId());
+        String baseURL = GWT.getHostPageBaseURL();
+        String convertURL = baseURL + "convert?ontology=" + encodedProjectName + "&revision=" + revisionnumber.getValue() + "&format=" + formatextension.getExtension();
+        MessageBox.alert(convertURL);
+        Window.open(convertURL,"Convert and return to trill", "");
     }
     
     public String getConvertedProject(){

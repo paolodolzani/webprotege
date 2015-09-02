@@ -29,7 +29,7 @@ public class ConvertAndReturnRequestHandlerImpl implements ConvertAndReturnReque
                /* DownloadSettingsDialog.showDialog(new DownloadFormatExtensionHandler() {
                     @Override
                     public void handleDownload(DownloadFormatExtension extension) {*/
-                        doConversion(projectId, DownloadFormatExtension.owl);
+                        doConversion(projectId);
                         //doConversion(projectID);
                     }
                 });
@@ -37,30 +37,26 @@ public class ConvertAndReturnRequestHandlerImpl implements ConvertAndReturnReque
        /* });*/
     
     
-     private void doConversion(ProjectId projectId, DownloadFormatExtension extension) {
+/*     private void doConversion(ProjectId projectId, DownloadFormatExtension extension) {
         RevisionNumber head = RevisionNumber.getHeadRevisionNumber();
         ProjectRevisionDownloader downloader = new ProjectRevisionDownloader(projectId, head, extension);
         downloader.download();
         jscode("ciao mondo");
         //altjscode("ciao");
-    }
+    } */
      private native void jscode(String messaggio)/*-{ 
              $doc.write("<form target='_blank' method='post' action='http://127.0.0.1:3020/trill_on_swish/' name='ConversionHiddenForm' ><input type='hidden' name='convertedProject' value=''></form>");
              $doc.ConversionHiddenForm.convertedProject.value = messaggio; 
              $doc.ConversionHiddenForm.submit();
              $doc.location.href="http://127.0.0.1:8084/webprotege/";
              }-*/;
-     private native void altjscode(String messaggio)/*-{
-             var convertedProject= messaggio;
-             jQuery.get("http://www.google.it",convertedProject,null,String);
-             }-*/;
-}
-    /*private void doConversion(ProjectId projectId){
+
+    private void doConversion(ProjectId projectId){
         RevisionNumber head=RevisionNumber.getHeadRevisionNumber();
         ProjectRevisionConverter converter=new ProjectRevisionConverter(projectId,head);
         converter.convert();
-        jscode(converter.getConvertedProject());
+      //  jscode(converter.getConvertedProject());
     }
-}*/
+}
 
      

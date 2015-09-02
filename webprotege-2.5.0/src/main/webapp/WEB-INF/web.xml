@@ -37,6 +37,11 @@
 		<servlet-class>edu.stanford.bmir.protege.web.server.filedownload.FileDownloadServlet</servlet-class>
 	</servlet>
 
+        <servlet>
+                <servlet-name>ProjectConvertServlet</servlet-name>
+                <servlet-class>edu.stanford.bmir.protege.server.projectconvert.ProjectConvertServlet</servlet-class>
+        </servlet>
+        
 	<servlet>
 		<servlet-name>AdminServiceImpl</servlet-name>
 		<servlet-class>edu.stanford.bmir.protege.web.server.AdminServiceImpl</servlet-class>
@@ -150,7 +155,12 @@
 		<servlet-name>DownloadServlet</servlet-name>
 		<url-pattern>/download</url-pattern>
 	</servlet-mapping>
-
+        
+        <servlet-mapping>
+                 <servlet-name>ProjectConvertServlet</servlet-name>
+                 <url-pattern>/convert</url-pattern>
+        </servlet-mapping>
+        
 	<servlet-mapping>
 		<servlet-name>RecaptchaService</servlet-name>
 		<url-pattern>/webprotege/recaptchaservice</url-pattern>

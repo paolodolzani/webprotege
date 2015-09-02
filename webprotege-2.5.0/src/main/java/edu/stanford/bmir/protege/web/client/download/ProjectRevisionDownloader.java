@@ -8,6 +8,7 @@ import edu.stanford.bmir.protege.web.shared.download.DownloadFormatExtension;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import com.gwtext.client.widgets.MessageBox;
 
 /**
  * Author: Matthew Horridge<br>
@@ -47,6 +48,7 @@ public class ProjectRevisionDownloader {
         String encodedProjectName = URL.encode(projectId.getId());
         String baseURL = GWT.getHostPageBaseURL();
         String downloadURL = baseURL + "download?ontology=" + encodedProjectName  + "&revision=" + revisionNumber.getValue() + "&format=" + formatExtension.getExtension();
+        MessageBox.alert(downloadURL);
         Window.open(downloadURL, "Download ontology", "");
     }
 
