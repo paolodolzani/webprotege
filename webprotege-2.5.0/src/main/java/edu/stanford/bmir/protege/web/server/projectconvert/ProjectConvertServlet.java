@@ -9,6 +9,7 @@ package edu.stanford.bmir.protege.web.server.projectconvert;
 import edu.stanford.bmir.protege.web.server.filedownload.DownloadFormat;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 import edu.stanford.bmir.protege.web.shared.revision.RevisionNumber;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -29,18 +30,10 @@ public class ProjectConvertServlet extends HttpServlet{
         ProjectId projectId = convParameters.getProjectId();
         RevisionNumber revisionnumber = convParameters.getRequestedRevision();
         DownloadFormat format = convParameters.getFormat();
-       // BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream()); //usato per scrivere output
-       // bos.flush();
-        System.out.println("ricevuta richiesta da " + request.getRemoteUser() + "con parametri: "+ projectId + " " + revisionnumber + " " + format);
-        //response.getOutputStream().println("Hello World!");
-        //response.flushBuffer();
-        PrintWriter out = response.getWriter();
-        String ciao= "Hello world!";
-        out.println(ciao);
-     //   out.flush();
-     //   out.close();
-        System.out.println("richiesta terminata");
-        
+        BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream()); //usato per scrivere output
+        OWLPIProjectConverter converter=new OWLPIProjectConverter(projectId,revisionnumber,format);
+        converter.writeproject(response,bos);
+        bos.flush();
     }
     else{
         System.out.println("richiesta errata");
