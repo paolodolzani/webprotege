@@ -70,7 +70,6 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
     private ConvertAndReturnRequestHandler convertandreturnrequesthandler = new ConvertAndReturnRequestHandler() {
         @Override
         public void handleProjectConvertRequest(ProjectId projectId){
-            MessageBox.alert("nessun gestore registrato");              //da rimuovere
             GWT.log("handleProjectConvertRequest: No handler registered.");
         }
     };

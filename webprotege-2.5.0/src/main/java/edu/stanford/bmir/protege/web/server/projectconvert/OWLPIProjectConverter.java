@@ -34,7 +34,7 @@ public class OWLPIProjectConverter {
         this.format=format;
     }
     
-    public void writeproject(HttpServletResponse response,OutputStream outputstream) throws IOException{
+  /*  public void writeproject(HttpServletResponse response,OutputStream outputstream) throws IOException{
         try{
             OWLAPIProjectDocumentStore documentstore = OWLAPIProjectDocumentStore.getProjectDocumentStore(projectId);
             response.setContentType("text/plain");
@@ -51,15 +51,15 @@ public class OWLPIProjectConverter {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
     public String convertontology(){
         String convertedontology="";
         try{
             OWLAPIProjectDocumentStore documentstore = OWLAPIProjectDocumentStore.getProjectDocumentStore(projectId);
-            if(revision.isHead())
-            {
+          //  if(revision.isHead())
+          //  {
                 convertedontology=documentstore.convertproject(format);
-            }
+          //  }
          /*   else
             {
                 convertedontology=documentstore.convertProjectRevision(revision,format);

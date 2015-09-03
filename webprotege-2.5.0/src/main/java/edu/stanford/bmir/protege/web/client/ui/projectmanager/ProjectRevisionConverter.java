@@ -35,8 +35,7 @@ public class ProjectRevisionConverter {
         String encodedProjectName = URL.encode(projectid.getId());
         String baseURL = GWT.getHostPageBaseURL();
         String convertURL = baseURL + "convert?ontology=" + encodedProjectName + "&revision=" + revisionnumber.getValue();
-        Window.open(convertURL,"Convert and return to trill", "");
-        Window.open("http://127.0.0.1:3020/trill_on_swish/?conversionUrl=" + baseURL +"convert&ontology=" + encodedProjectName + "&revision=" + revisionnumber.getValue(), "", "");
+        Window.open(convertURL,"Convert and return to trill", "");        
     }
     
     public String getConvertedProject(){

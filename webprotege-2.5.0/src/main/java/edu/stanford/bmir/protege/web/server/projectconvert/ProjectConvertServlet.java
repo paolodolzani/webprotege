@@ -29,7 +29,6 @@ public class ProjectConvertServlet extends HttpServlet{
    ProjectConversionParameters convParameters = new ProjectConversionParameters(request);
     if(convParameters.isProjectConvert()){
         response.setContentType("text/plain");
-        response.getWriter().write("hello world!");
         String convertedontology;
         ProjectId projectId = convParameters.getProjectId();
         RevisionNumber revisionnumber = convParameters.getRequestedRevision();
@@ -38,8 +37,9 @@ public class ProjectConvertServlet extends HttpServlet{
         OWLPIProjectConverter converter=new OWLPIProjectConverter(projectId,revisionnumber,format);
      //   converter.writeproject(response,bos);
         convertedontology=converter.convertontology();
-        response.getWriter().write("hello :" + convertedontology);
-     //   System.out.println("convertito: "+ convertedontology);
+        response.getWriter().println(convertedontology);
+        System.out.println("convertito: "+ convertedontology);
+        System.out.println("conversione terminata");
     }
     else{
         System.out.println("richiesta errata");

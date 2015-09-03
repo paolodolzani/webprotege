@@ -48,7 +48,6 @@ public class ProjectRevisionDownloader {
         String encodedProjectName = URL.encode(projectId.getId());
         String baseURL = GWT.getHostPageBaseURL();
         String downloadURL = baseURL + "download?ontology=" + encodedProjectName  + "&revision=" + revisionNumber.getValue() + "&format=" + formatExtension.getExtension();
-        MessageBox.alert(downloadURL);
         Window.open(downloadURL, "Download ontology", "");
     }
 
