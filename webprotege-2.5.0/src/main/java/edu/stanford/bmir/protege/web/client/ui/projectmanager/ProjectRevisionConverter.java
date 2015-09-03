@@ -24,22 +24,19 @@ public class ProjectRevisionConverter {
     
     private final RevisionNumber revisionnumber;
     
-    private final DownloadFormatExtension formatextension;
-    
     private String convertedProject;
     
     public ProjectRevisionConverter(ProjectId projectid, RevisionNumber revisionnumber){
         this.projectid = checkNotNull(projectid);
         this.revisionnumber= checkNotNull(revisionnumber);
-        this.formatextension= DownloadFormatExtension.owl;
     }
     
     public void convert(){
         String encodedProjectName = URL.encode(projectid.getId());
         String baseURL = GWT.getHostPageBaseURL();
-        String convertURL = baseURL + "convert?ontology=" + encodedProjectName + "&revision=" + revisionnumber.getValue() + "&format=" + formatextension.getExtension();
-        MessageBox.alert(convertURL);
+        String convertURL = baseURL + "convert?ontology=" + encodedProjectName + "&revision=" + revisionnumber.getValue();
         Window.open(convertURL,"Convert and return to trill", "");
+        Window.open("http://127.0.0.1:3020/trill_on_swish/?conversionUrl=" + baseURL +"convert&ontology=" + encodedProjectName + "&revision=" + revisionnumber.getValue(), "", "");
     }
     
     public String getConvertedProject(){

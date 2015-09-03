@@ -39,7 +39,7 @@
 
         <servlet>
                 <servlet-name>ProjectConvertServlet</servlet-name>
-                <servlet-class>edu.stanford.bmir.protege.server.projectconvert.ProjectConvertServlet</servlet-class>
+                <servlet-class>edu.stanford.bmir.protege.web.server.projectconvert.ProjectConvertServlet</servlet-class>
         </servlet>
         
 	<servlet>
