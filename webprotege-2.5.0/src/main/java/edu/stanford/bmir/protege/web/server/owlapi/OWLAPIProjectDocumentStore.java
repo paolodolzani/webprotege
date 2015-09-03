@@ -175,6 +175,31 @@ public class OWLAPIProjectDocumentStore {
             projectDownloadCacheLock.readLock().unlock();
         }
     }
+    
+     public String convertproject(DownloadFormat format) throws IOException, OWLOntologyStorageException {
+        // Does it already exist in the download cache?
+        createDownloadCacheIfNecessary(format);
+        // Feed cached file to caller
+        String convertedproject="";
+        final ReadWriteLock projectDownloadCacheLock = getProjectDownloadCacheLock(projectId);
+        try {
+            projectDownloadCacheLock.readLock().lock();
+            byte[] buffer = new byte[4096];
+            File downloadCache = getDownloadCacheFile(format);
+            InputStream is = new BufferedInputStream(new FileInputStream(downloadCache));
+            int read;
+            while ((read = is.read(buffer)) != -1) {
+                convertedproject+=new String(buffer);
+                System.out.println("parte di progetto: " + convertedproject);
+            }
+            System.out.println("progetto: " + convertedproject);
+            is.close();
+            return convertedproject;
+        }
+        finally {
+            projectDownloadCacheLock.readLock().unlock();
+        }
+    }
 
     public void exportProjectRevision(RevisionNumber revisionNumber, OutputStream outputStream, DownloadFormat format) throws IOException, OWLOntologyStorageException {
         checkNotNull(revisionNumber);
@@ -385,7 +410,6 @@ public class OWLAPIProjectDocumentStore {
                 OWLAPIProject project = OWLAPIProjectManager.getProjectManager().getProject(projectId);
                 OWLAPIChangeManager changeManager = project.getChangeManager();
                 RevisionNumber currentRevisionNumber = changeManager.getCurrentRevision();
-
                 BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(cachedFile));
                 exportProjectRevision(currentRevisionNumber, outputStream, format);
                 outputStream.close();
@@ -419,7 +443,7 @@ public class OWLAPIProjectDocumentStore {
         String baseFolder = projectDisplayName.replace(" ", "-") + "-ontologies-" + format.getExtension();
         baseFolder = baseFolder.toLowerCase();
         baseFolder = baseFolder + "-REVISION-" + revisionNumber.getValue();
-        ZipEntry rootOntologyEntry = new ZipEntry(baseFolder + "/root-ontology." + format.getExtension());
+        ZipEntry rootOntologyEntry = new ZipEntry(baseFolder + "root-ontology." + format.getExtension());
         zipOutputStream.putNextEntry(rootOntologyEntry);
         rootOntology.getOWLOntologyManager().saveOntology(rootOntology, format.getOntologyFormat(), zipOutputStream);
         zipOutputStream.closeEntry();
@@ -440,7 +464,6 @@ public class OWLAPIProjectDocumentStore {
         File downloadCacheDirectory = projectFileStore.getDownloadCacheDirectory();
         return new File(downloadCacheDirectory, "download." + format.getExtension() + ".zip");
     }
-
 
     private synchronized void createEmptyProject(NewProjectSettings newProjectSettings) throws IOException {
         try {

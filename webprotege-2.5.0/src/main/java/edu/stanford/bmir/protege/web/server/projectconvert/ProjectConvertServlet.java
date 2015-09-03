@@ -12,6 +12,7 @@ import edu.stanford.bmir.protege.web.shared.revision.RevisionNumber;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,18 +28,30 @@ public class ProjectConvertServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
    ProjectConversionParameters convParameters = new ProjectConversionParameters(request);
     if(convParameters.isProjectConvert()){
+        response.setContentType("text/plain");
+        response.getWriter().write("hello world!");
+        String convertedontology;
         ProjectId projectId = convParameters.getProjectId();
         RevisionNumber revisionnumber = convParameters.getRequestedRevision();
         DownloadFormat format = convParameters.getFormat();
-        BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream()); //usato per scrivere output
+      //  BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream()); //usato per scrivere output
         OWLPIProjectConverter converter=new OWLPIProjectConverter(projectId,revisionnumber,format);
-        converter.writeproject(response,bos);
-        bos.flush();
+     //   converter.writeproject(response,bos);
+        convertedontology=converter.convertontology();
+        response.getWriter().write("hello :" + convertedontology);
+     //   System.out.println("convertito: "+ convertedontology);
     }
     else{
         System.out.println("richiesta errata");
         response.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }
     
-    }  
+    }
+    private String open_file_to_String(byte[] bytes){
+        String file_string="";
+        for(int i=0; i<bytes.length;i++){
+            file_string+=(char) bytes[i];
+        }
+        return file_string;
+    }
 }

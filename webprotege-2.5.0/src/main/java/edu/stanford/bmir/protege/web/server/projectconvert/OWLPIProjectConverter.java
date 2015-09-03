@@ -40,12 +40,10 @@ public class OWLPIProjectConverter {
             response.setContentType("text/plain");
             if(revision.isHead())
             {
-                MessageBox.alert("sto eseguendo metodo1");
                 documentstore.exportProject(outputstream, format);
             }
             else
             {
-                MessageBox.alert("sto eseguendo metodo2");
                 documentstore.exportProjectRevision(revision, outputstream, format);
             }
         }
@@ -53,5 +51,24 @@ public class OWLPIProjectConverter {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+    }
+    public String convertontology(){
+        String convertedontology="";
+        try{
+            OWLAPIProjectDocumentStore documentstore = OWLAPIProjectDocumentStore.getProjectDocumentStore(projectId);
+            if(revision.isHead())
+            {
+                convertedontology=documentstore.convertproject(format);
+            }
+         /*   else
+            {
+                convertedontology=documentstore.convertProjectRevision(revision,format);
+            } */
+        }
+            catch(Exception ex)
+                    {
+                    
+                    }
+        return convertedontology;
     }
 }
