@@ -340,7 +340,7 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
         
         @Override
         public void render(Cell.Context context, ProjectListEntry object, SafeHtmlBuilder sb){
-            sb.appendHtmlConstant("<div style=\"width: 100%; height: 100%; cursor: pointer;\" title=\"Convert and return to trill\"><img style=\"padding-top: 1px; \" src=\"images/download.png\"/></div>");
+            sb.appendHtmlConstant("<div style=\"width: 100%; height: 100%; cursor: pointer;\" title=\"Convert and return to trill\"><img style=\"padding-top: 1px; \" src=\"images/tag_blue.png\"/></div>");
         }
     }
 

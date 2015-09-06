@@ -6,7 +6,6 @@
 
 package edu.stanford.bmir.protege.web.server.projectconvert;
 
-import com.gwtext.client.widgets.MessageBox;
 import edu.stanford.bmir.protege.web.server.filedownload.DownloadFormat;
 import edu.stanford.bmir.protege.web.server.owlapi.OWLAPIProjectDocumentStore;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;

@@ -193,9 +193,7 @@ public class OWLAPIProjectDocumentStore {
             int read;
             while ((read = is.read(buffer)) != -1) {
                 convertedproject+=new String(buffer);
-                System.out.println("parte di progetto: " + convertedproject);
             }
-            System.out.println("progetto: " + convertedproject);
             is.close();
             return convertedproject;
         }

@@ -6,6 +6,7 @@
 
 package edu.stanford.bmir.protege.web.server.projectconvert;
 
+import com.google.gwt.user.client.Window;
 import edu.stanford.bmir.protege.web.server.filedownload.DownloadFormat;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 import edu.stanford.bmir.protege.web.shared.revision.RevisionNumber;
@@ -38,20 +39,13 @@ public class ProjectConvertServlet extends HttpServlet{
      //   converter.writeproject(response,bos);
         convertedontology=converter.convertontology();
         response.getWriter().println(convertedontology);
-        System.out.println("convertito: "+ convertedontology);
         System.out.println("conversione terminata");
+        System.out.println("richiesta da "+ request.getRequestURL());
     }
     else{
         System.out.println("richiesta errata");
         response.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }
     
-    }
-    private String open_file_to_String(byte[] bytes){
-        String file_string="";
-        for(int i=0; i<bytes.length;i++){
-            file_string+=(char) bytes[i];
-        }
-        return file_string;
     }
 }
