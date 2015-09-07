@@ -35,7 +35,13 @@ public class OWLPIProjectConverter {
         try{
             OWLAPIProjectDocumentStore documentstore = OWLAPIProjectDocumentStore.getProjectDocumentStore(projectId);
           
-                convertedontology=documentstore.convertproject(format);
+                //convertedontology=documentstore.convertproject(format,null);
+                if(revision.isHead()) {
+                convertedontology=documentstore.convertproject(format,null);
+            }
+            else {
+                convertedontology=documentstore.convertproject(format,revision);
+            }
           
         }
             catch(Exception ex)

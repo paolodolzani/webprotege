@@ -178,9 +178,9 @@ public class OWLAPIProjectDocumentStore {
     
     
      //funzione utilizzata per convertire un dato progetto in formato RDF/XML
-     public String convertproject(DownloadFormat format) throws IOException, OWLOntologyStorageException {
+     public String convertproject(DownloadFormat format,RevisionNumber revision) throws IOException, OWLOntologyStorageException {
         // Does it already exist in the download cache?
-        createConversionCacheIfNecessary(format);
+        createConversionCacheIfNecessary(format, revision);
         // Feed cached file to caller
         String convertedproject="";               //stringa in cui vado a salvare il progetto nel formato desiderato
         final ReadWriteLock projectDownloadCacheLock = getProjectDownloadCacheLock(projectId);
@@ -201,7 +201,7 @@ public class OWLAPIProjectDocumentStore {
             projectDownloadCacheLock.readLock().unlock();
         }
     }
-    public void createConversionCacheIfNecessary(DownloadFormat format)   //metodo che serve a creare il file all'interno delle cache da cui leggere l'ontologia convertita
+    public void createConversionCacheIfNecessary(DownloadFormat format,RevisionNumber revision)   //metodo che serve a creare il file all'interno delle cache da cui leggere l'ontologia convertita
     {
         ReadWriteLock projectConvertCacheLock = getProjectDownloadCacheLock(projectId);
         try
@@ -209,17 +209,21 @@ public class OWLAPIProjectDocumentStore {
             projectConvertCacheLock.writeLock().lock();
             File conversionCacheDirectory = projectFileStore.getDownloadCacheDirectory();
             File cachedFile = getConvertCacheFile(format);
+            OWLOntologyManager manager;
             if(!cachedFile.exists())
             {
                 conversionCacheDirectory.mkdirs();
                 OWLAPIProject project = OWLAPIProjectManager.getProjectManager().getProject(projectId);
-                OWLAPIChangeManager changeManager = project.getChangeManager();
-                RevisionNumber currentRevisionNumber = changeManager.getCurrentRevision();
-                OWLOntologyManager manager = getOntologyManagerForRevision(currentRevisionNumber);
+                if(revision == null)
+                { OWLAPIChangeManager changeManager = project.getChangeManager();
+                  //RevisionNumber currentRevisionNumber = changeManager.getCurrentRevision();
+                   revision = changeManager.getCurrentRevision();
+                }
+                    manager=getOntologyManagerForRevision(revision);
                 OWLOntologyID rootOntologyId = project.getRootOntology().getOntologyID();
                 Optional<OWLOntology> revisionRootOntology = getOntologyFromManager(manager, rootOntologyId);
         if(revisionRootOntology.isPresent()) {
-            applyRevisionMetadataAnnotationsToOntology(currentRevisionNumber, revisionRootOntology.get());
+            applyRevisionMetadataAnnotationsToOntology(revision, revisionRootOntology.get());
             File rootOntologyFile = new File(projectFileStore.getDownloadCacheDirectory(),"root-ontology-converted.owl");
             rootOntologyFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(rootOntologyFile);
