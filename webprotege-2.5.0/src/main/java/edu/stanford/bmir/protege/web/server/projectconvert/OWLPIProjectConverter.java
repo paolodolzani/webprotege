@@ -10,10 +10,7 @@ import edu.stanford.bmir.protege.web.server.filedownload.DownloadFormat;
 import edu.stanford.bmir.protege.web.server.owlapi.OWLAPIProjectDocumentStore;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 import edu.stanford.bmir.protege.web.shared.revision.RevisionNumber;
-import java.io.IOException;
-import java.io.OutputStream;
-import javax.servlet.http.HttpServletResponse;
-import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+
 
 /**
  *
@@ -32,41 +29,18 @@ public class OWLPIProjectConverter {
         this.revision=revision;
         this.format=format;
     }
-    
-  /*  public void writeproject(HttpServletResponse response,OutputStream outputstream) throws IOException{
-        try{
-            OWLAPIProjectDocumentStore documentstore = OWLAPIProjectDocumentStore.getProjectDocumentStore(projectId);
-            response.setContentType("text/plain");
-            if(revision.isHead())
-            {
-                documentstore.exportProject(outputstream, format);
-            }
-            else
-            {
-                documentstore.exportProjectRevision(revision, outputstream, format);
-            }
-        }
-        catch (OWLOntologyStorageException e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }
-    }*/
+
     public String convertontology(){
         String convertedontology="";
         try{
             OWLAPIProjectDocumentStore documentstore = OWLAPIProjectDocumentStore.getProjectDocumentStore(projectId);
-          //  if(revision.isHead())
-          //  {
+          
                 convertedontology=documentstore.convertproject(format);
-          //  }
-         /*   else
-            {
-                convertedontology=documentstore.convertProjectRevision(revision,format);
-            } */
+          
         }
             catch(Exception ex)
                     {
-                    
+                     ex.printStackTrace();
                     }
         return convertedontology;
     }

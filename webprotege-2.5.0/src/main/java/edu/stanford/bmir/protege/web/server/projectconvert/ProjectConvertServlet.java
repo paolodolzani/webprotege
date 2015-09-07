@@ -6,14 +6,11 @@
 
 package edu.stanford.bmir.protege.web.server.projectconvert;
 
-import com.google.gwt.user.client.Window;
+
 import edu.stanford.bmir.protege.web.server.filedownload.DownloadFormat;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 import edu.stanford.bmir.protege.web.shared.revision.RevisionNumber;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,12 +35,9 @@ public class ProjectConvertServlet extends HttpServlet{
         OWLPIProjectConverter converter=new OWLPIProjectConverter(projectId,revisionnumber,format);
      //   converter.writeproject(response,bos);
         convertedontology=converter.convertontology();
-        response.getWriter().println(convertedontology);
-        System.out.println("conversione terminata");
-        System.out.println("richiesta da "+ request.getRequestURL());
+        response.getWriter().print(convertedontology);
     }
     else{
-        System.out.println("richiesta errata");
         response.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }
     

@@ -56,7 +56,6 @@ public class ProjectRevisionConverter {
                     if (200 == response.getStatusCode())
                     {
                         String convertedProject=new String(response.getText());
-                        Window.alert("progetto convertito: "+ convertedProject);
                         returnTOtrill(convertedProject);
                     } else {
                         Window.alert("Received HTTP status code other than 200 : "+ response.getStatusText());
@@ -83,6 +82,6 @@ public class ProjectRevisionConverter {
 
   private native void returnTOtrill(String converted)/*-{
       $wnd.opener.postMessage(converted,"http://localhost:3020/trill_on_swish/");
-      $wnd.alert("messaggio mandato con successo");
+      $wnd.alert("messaggio inviato");
 }-*/;
 }

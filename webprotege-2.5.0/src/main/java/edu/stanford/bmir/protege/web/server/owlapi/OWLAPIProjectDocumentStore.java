@@ -180,7 +180,6 @@ public class OWLAPIProjectDocumentStore {
      //funzione utilizzata per convertire un dato progetto in formato RDF/XML
      public String convertproject(DownloadFormat format) throws IOException, OWLOntologyStorageException {
         // Does it already exist in the download cache?
-        //createDownloadCacheIfNecessary(format);
         createConversionCacheIfNecessary(format);
         // Feed cached file to caller
         String convertedproject="";               //stringa in cui vado a salvare il progetto nel formato desiderato
@@ -192,7 +191,8 @@ public class OWLAPIProjectDocumentStore {
             InputStream is = new BufferedInputStream(new FileInputStream(downloadCache));
             int read;
             while ((read = is.read(buffer)) != -1) {
-                convertedproject+=new String(buffer);
+                byte[] src=Arrays.copyOfRange(buffer, 0, read);
+                convertedproject+=new String(src);
             }
             is.close();
             return convertedproject;
@@ -228,7 +228,9 @@ public class OWLAPIProjectDocumentStore {
         }
             }
         }
-        catch(Exception ex){}
+        catch(Exception ex){
+        ex.printStackTrace();
+        }
         finally {
             projectConvertCacheLock.writeLock().unlock();
         }
