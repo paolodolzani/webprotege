@@ -230,6 +230,10 @@ public class OWLAPIProjectDocumentStore {
             revisionRootOntology.get().getOWLOntologyManager().saveOntology(revisionRootOntology.get(),format.getOntologyFormat(),fos);
             fos.close();
         }
+         else {
+            // An error - no flipping ontology!
+            throw new RuntimeException("The ontology could not be converted from " + WebProtegeProperties.get().getApplicationHostName() + ".  Please contact the administrator.");
+        }
             }
         }
         catch(Exception ex){
