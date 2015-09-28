@@ -90,8 +90,8 @@ public class ProjectManagerViewImpl extends Composite implements ProjectManagerV
                 handleSideBarSelection(event);
             }
         });
-        setCreateProjectEnabled(true);         //modificato era settato su false
-        setUploadProjectEnabled(true);         //modificato era settato su false
+        setCreateProjectEnabled(false);         
+        setUploadProjectEnabled(false);         
     }
 
 

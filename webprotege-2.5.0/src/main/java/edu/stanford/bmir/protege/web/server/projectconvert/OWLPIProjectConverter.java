@@ -29,15 +29,14 @@ public class OWLPIProjectConverter {
         this.revision=revision;
         this.format=format;
     }
-
+//funzione per la conversione dell'ontologia in RDF/XML che provvede alla conversine passando il formato(che sarà nel nostro caso sempre RDF/XML) e il numero di revisione
     public String convertontology(){
         String convertedontology="";
         try{
             OWLAPIProjectDocumentStore documentstore = OWLAPIProjectDocumentStore.getProjectDocumentStore(projectId);
           
-                //convertedontology=documentstore.convertproject(format,null);
                 if(revision.isHead()) {
-                convertedontology=documentstore.convertproject(format,null);
+                convertedontology=documentstore.convertproject(format,null); 
             }
             else {
                 convertedontology=documentstore.convertproject(format,revision);

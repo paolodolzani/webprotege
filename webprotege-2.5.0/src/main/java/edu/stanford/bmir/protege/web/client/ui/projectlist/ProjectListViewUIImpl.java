@@ -130,14 +130,14 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
         projectTable.addColumn(ownerColumn, "Owner");
         projectTable.addColumn(downloadColumn, "Download");
         projectTable.addColumn(trashColumn);
-        projectTable.addColumn(convertColumn);                  //aggiunta
+        projectTable.addColumn(convertColumn);                  //aggiunta la colonna per le conversioni dei progetti in RDF/XML e passaggio a TRILL on SWISH
 //        projectTable.setPageSize(Integer.MAX_VALUE);
 
         projectTable.setColumnWidth(projectNameColumn, "260px");
         projectTable.setColumnWidth(ownerColumn, "150px");
         projectTable.setColumnWidth(downloadColumn, "90px");
         projectTable.setColumnWidth(trashColumn, "60px");
-        projectTable.setColumnWidth(convertColumn, "40px");                   //aggiunta
+        projectTable.setColumnWidth(convertColumn, "40px");                   
 
         projectTable.getColumnSortList().push(projectNameColumn);
 
@@ -317,7 +317,7 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
         }
     }
     
-    private class ConvertColumn extends Column<ProjectListEntry, String> {
+    private class ConvertColumn extends Column<ProjectListEntry, String> {  //colonna per convertire i progetti desiderati
         private ConvertColumn() {
             super(new ClickableTextCell());
         }
@@ -340,7 +340,7 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
         
         @Override
         public void render(Cell.Context context, ProjectListEntry object, SafeHtmlBuilder sb){
-            sb.appendHtmlConstant("<div style=\"width: 100%; height: 100%; cursor: pointer;\" title=\"Convert and return to trill\"><img style=\"padding-top: 1px; \" src=\"images/tag_blue.png\"/></div>");
+            sb.appendHtmlConstant("<div style=\"width: 100%; height: 100%; cursor: pointer;\" title=\"Convert and return to TRILL on SWISH\"><img style=\"padding-top: 1px; \" src=\"images/tag_blue.png\"/></div>");
         }
     }
 

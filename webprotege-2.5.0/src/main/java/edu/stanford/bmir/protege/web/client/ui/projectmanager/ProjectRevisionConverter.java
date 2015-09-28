@@ -35,17 +35,17 @@ public class ProjectRevisionConverter {
     
     public void convert(){
         String encodedProjectName = URL.encode(projectid.getId());
-        String requestData="ontology=" + encodedProjectName + "&revision=" + revisionnumber.getValue();
+        String requestData="";
         String baseURL = GWT.getHostPageBaseURL();
         String convertURL = baseURL + "convert?ontology=" + encodedProjectName + "&revision=" + revisionnumber.getValue();
         boolean opened=openedPage();
-        //controllo se la pagina è stata aperta
+        //controllo se la pagina è stata aperta da un'altra pagina, in modo da avere un riferimento a cui inviare l'ontologia in RDF/XML
         if(opened==true)
         { //invio la richiesta alla servlet per ottenere l'ontologia convertita!!!
         RequestBuilder request= new RequestBuilder(RequestBuilder.GET,convertURL);
         try
         {
-            request.sendRequest(requestData.toString(), new RequestCallback()
+            request.sendRequest(requestData.toString(), new RequestCallback()   //requestData vuoti poichè i parametri di interesse sono già specificati nell'URL
             {
                  public void onError(Request request, Throwable e) 
                 {
@@ -53,10 +53,10 @@ public class ProjectRevisionConverter {
                 }
                 public void onResponseReceived(Request request, Response response)
             {
-                    if (200 == response.getStatusCode())
+                    if (200 == response.getStatusCode())            //controllo che la response sia stata ricevuta in maniera corretta (stato 200)
                     {
                         String convertedProject=new String(response.getText());
-                        returnTOtrill(convertedProject);
+                        returnTOtrill(convertedProject);   //funzione javascript che invia la stringa ottenuta a TRILL on SWISH
                     } else {
                         Window.alert("Received HTTP status code other than 200 : "+ response.getStatusText());
                     }
@@ -69,6 +69,9 @@ public class ProjectRevisionConverter {
         }
         }
     }
+    
+    /* Funzioni javascript utilizzate, scritte seguendo la sintassi di JSNI*/
+    
     
     private native boolean openedPage()/*-{ 
              var Windowreference=$wnd.opener;

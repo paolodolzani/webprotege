@@ -25,7 +25,7 @@ public class ConvertAndReturnRequestHandlerImpl implements ConvertAndReturnReque
             @Override
             public void onSuccess() {
                
-                        doConversion(projectId);
+                        doConversion(projectId);   //provvede ad effettuare la conversione passando l'ID del progetto
                         
                     }
                 });

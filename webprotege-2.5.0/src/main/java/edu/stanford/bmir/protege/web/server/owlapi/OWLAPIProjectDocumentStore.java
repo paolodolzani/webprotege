@@ -191,11 +191,11 @@ public class OWLAPIProjectDocumentStore {
             InputStream is = new BufferedInputStream(new FileInputStream(downloadCache));
             int read;
             while ((read = is.read(buffer)) != -1) {
-                byte[] src=Arrays.copyOfRange(buffer, 0, read);
-                convertedproject+=new String(src);
+                byte[] src=Arrays.copyOfRange(buffer, 0, read);  //converto in stringa solo il numero di byte effettivamente letti
+                convertedproject+=new String(src);              // e non l'array completo di dim 4096
             }
             is.close();
-            return convertedproject;
+            return convertedproject;  //il metodo restituisce la stringa creata
         }
         finally {
             projectDownloadCacheLock.readLock().unlock();
@@ -207,16 +207,15 @@ public class OWLAPIProjectDocumentStore {
         try
         {
             projectConvertCacheLock.writeLock().lock();
-            File conversionCacheDirectory = projectFileStore.getDownloadCacheDirectory();
+            File conversionCacheDirectory = projectFileStore.getDownloadCacheDirectory();  //mi crea il file da leggere nella cache directory dei download(si potrebbe in alternativa creare una directory apposita per le conversioni)
             File cachedFile = getConvertCacheFile(format);
             OWLOntologyManager manager;
             if(!cachedFile.exists())
             {
                 conversionCacheDirectory.mkdirs();
                 OWLAPIProject project = OWLAPIProjectManager.getProjectManager().getProject(projectId);
-                if(revision == null)
+                if(revision == null)    //se la revision passata è null provvede a recuperare la versione corrente
                 { OWLAPIChangeManager changeManager = project.getChangeManager();
-                  //RevisionNumber currentRevisionNumber = changeManager.getCurrentRevision();
                    revision = changeManager.getCurrentRevision();
                 }
                     manager=getOntologyManagerForRevision(revision);
@@ -224,10 +223,10 @@ public class OWLAPIProjectDocumentStore {
                 Optional<OWLOntology> revisionRootOntology = getOntologyFromManager(manager, rootOntologyId);
         if(revisionRootOntology.isPresent()) {
             applyRevisionMetadataAnnotationsToOntology(revision, revisionRootOntology.get());
-            File rootOntologyFile = new File(projectFileStore.getDownloadCacheDirectory(),"root-ontology-converted.owl");
-            rootOntologyFile.createNewFile();
+            File rootOntologyFile = new File(projectFileStore.getDownloadCacheDirectory(),"root-ontology-converted.owl"); 
+            rootOntologyFile.createNewFile();  //crea il file con l'ontologia in RDF/XML da leggere per passarlo a TRILL on SWISH
             FileOutputStream fos = new FileOutputStream(rootOntologyFile);
-            revisionRootOntology.get().getOWLOntologyManager().saveOntology(revisionRootOntology.get(),format.getOntologyFormat(),fos);
+            revisionRootOntology.get().getOWLOntologyManager().saveOntology(revisionRootOntology.get(),format.getOntologyFormat(),fos);  //salva l'ontologia nel file sopra creato
             fos.close();
         }
          else {

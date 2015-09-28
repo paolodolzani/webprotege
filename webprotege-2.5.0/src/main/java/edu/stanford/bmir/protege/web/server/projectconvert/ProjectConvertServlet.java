@@ -25,16 +25,14 @@ public class ProjectConvertServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
    ProjectConversionParameters convParameters = new ProjectConversionParameters(request);
-    if(convParameters.isProjectConvert()){
+    if(convParameters.isProjectConvert()){   //controllo se la richiesta avviene in maniera corretta
         response.setContentType("text/plain");
         String convertedontology;
         ProjectId projectId = convParameters.getProjectId();
         RevisionNumber revisionnumber = convParameters.getRequestedRevision();
         DownloadFormat format = convParameters.getFormat();
-      //  BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream()); //usato per scrivere output
         OWLPIProjectConverter converter=new OWLPIProjectConverter(projectId,revisionnumber,format);
-     //   converter.writeproject(response,bos);
-        convertedontology=converter.convertontology();
+        convertedontology=converter.convertontology();  //recupero l'ontologia in RDF/XML e la salvo in una stringa, per poi scriverla nella response
         response.getWriter().print(convertedontology);
     }
     else{
