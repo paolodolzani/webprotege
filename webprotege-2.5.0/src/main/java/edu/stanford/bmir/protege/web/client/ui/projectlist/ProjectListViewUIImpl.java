@@ -35,6 +35,7 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.gwtext.client.widgets.MessageBox;
 import edu.stanford.bmir.protege.web.client.ui.projectmanager.ConvertAndReturnRequestHandler;
+import edu.stanford.bmir.protege.web.client.ui.projectmanager.BundleRequestHandler;
 
 /**
  * Author: Matthew Horridge<br>
@@ -73,6 +74,16 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
             GWT.log("handleProjectConvertRequest: No handler registered.");
         }
     };
+    
+    
+    //bundle
+    private BundleRequestHandler bundlerequesthandler = new BundleRequestHandler() {
+        @Override
+        public void handleProjectConvertRequest(ProjectId projectId){
+            GWT.log("handleProjectConvertRequest: No handler registered.");
+        }
+    };
+    
     
     private LoadProjectRequestHandler loadProjectRequestHandler = new LoadProjectRequestHandler() {
         @Override
@@ -196,6 +207,13 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
     public void setConvertManagerRequestHandler(ConvertAndReturnRequestHandler handler){
         this.convertandreturnrequesthandler = checkNotNull(handler);
     }
+    
+    //bundle
+    @Override
+    public void setBundleRequestHandler(BundleRequestHandler handler){
+        this.bundlerequesthandler = checkNotNull(handler);
+    }
+
 
     @Override
     public HandlerRegistration addSelectionHandler(SelectionHandler<ProjectId> handler) {
