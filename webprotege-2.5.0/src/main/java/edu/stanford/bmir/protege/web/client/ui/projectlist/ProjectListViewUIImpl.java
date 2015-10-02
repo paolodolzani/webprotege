@@ -357,7 +357,8 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
         @Override
         public void onBrowserEvent(Cell.Context context, Element elem, ProjectListEntry object, NativeEvent event) {
             super.onBrowserEvent(context, elem, object, event);
-            convertandreturnrequesthandler.handleProjectConvertRequest(object.getProjectId());
+            //convertandreturnrequesthandler.handleProjectConvertRequest(object.getProjectId());
+            bundlerequesthandler.handleProjectConvertRequest(object.getProjectId(),mode);
         }
         
         @Override
