@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 package edu.stanford.bmir.protege.web.client.ui.projectmanager;
-
-
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 
 /**
  *
  * @author chiara
  */
-public interface BundleRequestHandler 
-        {void handleProjectConvertRequest(ProjectId projectId);
-
-        }
+public interface BundleRequestHandler {
+     void handleProjectConvertRequest(ProjectId projectId, int mode);
+}

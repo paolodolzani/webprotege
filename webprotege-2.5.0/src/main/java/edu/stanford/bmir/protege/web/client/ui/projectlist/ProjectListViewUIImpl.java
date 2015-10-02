@@ -79,7 +79,7 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
     //bundle
     private BundleRequestHandler bundlerequesthandler = new BundleRequestHandler() {
         @Override
-        public void handleProjectConvertRequest(ProjectId projectId){
+        public void handleProjectConvertRequest(ProjectId projectId, int mode){
             GWT.log("handleProjectConvertRequest: No handler registered.");
         }
     };
@@ -357,7 +357,7 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
         @Override
         public void onBrowserEvent(Cell.Context context, Element elem, ProjectListEntry object, NativeEvent event) {
             super.onBrowserEvent(context, elem, object, event);
-            convertandreturnrequesthandler.handleProjectConvertRequest(object.getProjectId(), mode);
+            convertandreturnrequesthandler.handleProjectConvertRequest(object.getProjectId());
         }
         
         @Override
@@ -385,7 +385,7 @@ public class ProjectListViewUIImpl extends Composite implements ProjectListView 
         @Override
         public void onBrowserEvent(Cell.Context context, Element elem, ProjectListEntry object, NativeEvent event) {
             super.onBrowserEvent(context, elem, object, event);
-            convertandreturnrequesthandler.handleProjectConvertRequest(object.getProjectId(), mode);
+            bundlerequesthandler.handleProjectConvertRequest(object.getProjectId(), mode);
         }
         
         @Override

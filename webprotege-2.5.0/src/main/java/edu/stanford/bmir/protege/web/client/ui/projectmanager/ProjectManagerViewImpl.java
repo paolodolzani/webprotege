@@ -147,10 +147,16 @@ public class ProjectManagerViewImpl extends Composite implements ProjectManagerV
         noticesPanel.setVisible(false);
     }
 
-
+/*
     @Override
     public void setConvertManagerRequestHandler(ConvertAndReturnRequestHandler handler){  //aggiunto
         projectListView.setConvertManagerRequestHandler(checkNotNull(handler));
+    }
+    */
+    
+    @Override
+    public void setBundleRequestHandler(BundleRequestHandler handler){  //aggiunto
+        projectListView.setBundleRequestHandler(checkNotNull(handler));
     }
     
     @Override
